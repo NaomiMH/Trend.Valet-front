@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
     return (
         <>
             <Head>
-                <title>FIFO</title>
+                <title>VALET</title>
             </Head>
             <Component {...pageProps} />
         </>
