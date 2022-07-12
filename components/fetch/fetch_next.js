@@ -20,7 +20,7 @@ export function Fetch_Next(url, play, next, method = "get", data = {}, sendToNex
             method: method,
             headers: {
                 "Content-Type": "application/json",
-                "x-access-token": "token-value",
+                "Authorization": localStorage.getItem('token')
             },
             body: JSON.stringify(data)
         }

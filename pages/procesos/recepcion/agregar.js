@@ -98,7 +98,6 @@ const RecepcionAgregar = () => {
                 updatePallet[palletNum][newRow[Attributes.Clave_Material]] = { "Cajas": 0, "Piezas": 0 }
             }
             updatePallet[palletNum][newRow[Attributes.Clave_Material]]["Cajas"] = updatePallet[palletNum][newRow[Attributes.Clave_Material]]["Cajas"] + 1
-            console.log(Number(newRow[Attributes.Cantidad_Recibida].replace(",",".")))
             updatePallet[palletNum][newRow[Attributes.Clave_Material]]["Piezas"] = updatePallet[palletNum][newRow[Attributes.Clave_Material]]["Piezas"] + Number(newRow[Attributes.Cantidad_Recibida].replace(",","."))
             updatePallet[palletNum]["Cantidad"] = updatePallet[palletNum]["Cantidad"] + 1
             setPalletInfo(updatePallet)

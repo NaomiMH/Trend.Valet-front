@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from "next/router";
 import { Text } from "./text/text";
 
-const Sidebar = ({ width }) => {
+const Sidebar = ({ width, admin }) => {
     // Get the router
     const router = new useRouter();
 
@@ -20,8 +20,6 @@ const Sidebar = ({ width }) => {
     ];
 
     let [show_sistema, setShowSistema] = useState(false);
-    let [show_catalogo, setShowCatalogo] = useState(false);
-    let [show_procosos, setShowProcesos] = useState(false);
     let [show_consultas, setShowConsultas] = useState(false);
 
     function fill_detail_menu(object) {
@@ -43,15 +41,19 @@ const Sidebar = ({ width }) => {
                     <p className="text-white text-2xl font-black cursor-pointer">VALET</p>
                 </Link>
                 <nav className="mt-1 list-none">
-                    <p
-                        onClick={() => setShowSistema(!show_sistema)}
-                        className="text-white text-base font-black cursor-pointer"
-                    >
-                        {Text.System}
-                    </p>
-                    <div className={show_sistema ? 'block' : 'hidden'}>
-                        {menu_sistema.map((link) => (fill_detail_menu(link)))}
-                    </div>
+                    {admin ? (
+                        <>
+                            <p
+                                onClick={() => setShowSistema(!show_sistema)}
+                                className="text-white text-base font-black cursor-pointer"
+                            >
+                                {Text.System}
+                            </p>
+                            <div className={show_sistema ? 'block' : 'hidden'}>
+                                {menu_sistema.map((link) => (fill_detail_menu(link)))}
+                            </div>
+                        </>
+                    ) : null}
                     <p
                         onClick={() => setShowConsultas(!show_consultas)}
                         className="text-white text-base font-black cursor-pointer"

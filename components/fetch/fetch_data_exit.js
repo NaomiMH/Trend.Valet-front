@@ -2,7 +2,7 @@ import { Alert_show } from "../alert/alert"
 import Router from 'next/router';
 import { Errors } from "../text/error";
 
-export function Fetch_Data_Exit(url, play, setData, urlBack, setResume = null) {
+export function Fetch_Data_Exit(url, play, setData, urlBack) {
     if (!play) {
         alert(Errors.ParameterMissing("Fetch_Data_Exit", "play"))
         return
@@ -19,7 +19,11 @@ export function Fetch_Data_Exit(url, play, setData, urlBack, setResume = null) {
         Alert_show(Errors.ParameterMissing("Fetch_Data_Exit", "urlBack"), play)
         return
     }
-    fetch(url)
+    fetch(url, {
+        headers: {
+            "Authorization": localStorage.getItem('token')
+        },
+    })
         .then((res) => res.json())
         .then((res) => {
             // If server send an error message
@@ -45,11 +49,6 @@ export function Fetch_Data_Exit(url, play, setData, urlBack, setResume = null) {
                         setData(res.result)
                     } else {
                         setData(res)
-                    }
-                    if (res.resume) {
-                        if (setResume != null) {
-                            setResume(res.resume)
-                        }
                     }
                 }
             }

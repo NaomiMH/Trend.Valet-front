@@ -2,7 +2,6 @@
 
 # database url
 /components/helpers/databaseUrl.js
-/components/helpers/consts.js
 
 # dependencies
 /node_modules

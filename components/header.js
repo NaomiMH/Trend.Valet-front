@@ -2,24 +2,18 @@ import React from 'react';
 import Btn_Standard from './buttons/btn_standard';
 import Image from "next/image";
 import { Text } from './text/text';
+import { useRouter } from 'next/router';
 
-const Header = ({ width }) => {
+const Header = ({ width, name }) => {
     // Scale of the logo
     const scale = 1;
 
-    // query de apollo
-    // const { data, loading, error} = useQuery(OBTENER_USUARIO);
-
-    // if(loading) return null;
-
-    // if(!data) {
-    //     return router.push('/login');
-    // }
-
-    // const { nombre, apellido } = data.obtenerUsuario;
+    // routing
+    const router = useRouter();
 
     const cerrarSesion = () => {
-        console.log("Click")
+        localStorage.removeItem('token')
+        router.push('/login')
     }
 
     return (
@@ -29,7 +23,7 @@ const Header = ({ width }) => {
                     <Image src="/Trend Technologies Corporate Logo-PhotoRoom.png" alt="Trend Technologies" height={25 * scale} width={100 * scale} />
                 </div>
             )}
-            <p className="mr-2">{Text.Hello}: nombre apellido</p>
+            <p className="mr-2">{Text.Hello}: {name}</p>
             <Btn_Standard btnClick={cerrarSesion} btnName={Text.Signoff} />
         </div>
 

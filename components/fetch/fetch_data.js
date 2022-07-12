@@ -18,7 +18,11 @@ export function Fetch_Data(url, play, setEmpty, setData) {
         Alert_show(Errors.ParameterMissing("Fetch_Data", "setData"), play)
         return
     }
-    fetch(url)
+    fetch(url, {
+        headers: {
+            "Authorization": localStorage.getItem('token')
+        }
+    })
         .then((res) => res.json())
         .then((res) => {
             // If server send an error message

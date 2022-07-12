@@ -25,6 +25,26 @@ export const Text = {
         spanish: "Historial de Etiquetas",
         english: "Labels History"
     }[language],
+    Hello: {
+        spanish: "Hola",
+        english: "Hello"
+    }[language],
+    Login: {
+        spanish: "Iniciar Sesion",
+        english: "Login"
+    }[language],
+    Username: {
+        spanish: "Usuario",
+        english: "Username"
+    }[language],
+    Password: {
+        spanish: "Contraseña",
+        english: "Password"
+    }[language],
+    Signoff: {
+        spanish: "Cerrar Sesion",
+        english: "Signoff"
+    }[language],
     // Temporary: {
     //     spanish: "",
     //     english: ""

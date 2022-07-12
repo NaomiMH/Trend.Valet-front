@@ -8,7 +8,11 @@ export function Fetch_Config({ play, setBox, setHours, setPosition, setSHours })
         alert(Errors.ParameterMissing("Fetch_Data_Exit", "play"))
         return
     }
-    fetch(Conf.getAll)
+    fetch(Conf.getAll, {
+        headers: {
+            "Authorization": localStorage.getItem('token')
+        }
+    })
         .then((res) => res.json())
         .then((res) => {
             // If server send an error message
