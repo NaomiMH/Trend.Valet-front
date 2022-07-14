@@ -54,10 +54,10 @@ const RecepcionAgregar = () => {
         tempRead[count] = { reading, info, accepted: 0 }
         if (count == 3) {
             tempRead[count].accepted = 1
-            if (tempRead[1].reading == reading) {
+            if (tempRead[1].info[Attributes.Clave_Material] == info[Attributes.Clave_Material]) {
                 tempRead[1].accepted = 1
             }
-            if (tempRead[2].reading == reading) {
+            if (tempRead[2].info[Attributes.Clave_Material] == info[Attributes.Clave_Material]) {
                 tempRead[2].accepted = 1
             }
         }
@@ -101,13 +101,12 @@ const RecepcionAgregar = () => {
                             {Text.Accepted}
                         </p>
                     )
-                } else {
-                    return (
-                        <p className='text-red-600 font-bold'>
-                            {Text.Refused}
-                        </p>
-                    )
                 }
+                return (
+                    <p className='text-red-600 font-bold'>
+                        {Text.Refused}
+                    </p>
+                )
             }
             if (read[num].accepted) {
                 return (
@@ -122,14 +121,12 @@ const RecepcionAgregar = () => {
                 </p>
             )
         }
-        if (count > num) {
-            if (read[num].reading) {
-                return (
-                    <p className='text-yellow-600 font-bold'>
-                        {Text.Read}
-                    </p>
-                )
-            }
+        if (read[num].reading) {
+            return (
+                <p className='text-yellow-600 font-bold'>
+                    {Text.Read}
+                </p>
+            )
         }
         return <p>{Text.None}</p>
     }
