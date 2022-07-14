@@ -2,6 +2,7 @@ import { Alert_show } from "../alert/alert"
 import { Errors } from "../text/error"
 import emailjs from '@emailjs/browser'
 import { publicKey, serviceID, templateID } from "./email"
+import { Message } from "../text/message"
 
 export function Send_Email(templateParams, play ) {
     if (!play) {

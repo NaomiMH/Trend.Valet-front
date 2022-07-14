@@ -73,7 +73,7 @@ const RecepcionAgregar = () => {
         setRead(defaultRead)
     }
 
-    async function nextSave(data, { postData }) {
+    async function nextSave(data, {read}) {
         if ("emailList" in data) {
             if ("msg" in data.emailList) {
                 Alert_show(data.email.msg, play)
@@ -95,9 +95,9 @@ const RecepcionAgregar = () => {
                     name,
                     fecha: data[Attributes.Date],
                     label1: data[Attributes.Label1],
-                    label1R: postData[1].accepted ? Text.Accepted : Text.Refused,
+                    label1R: read[1].accepted ? Text.Accepted : Text.Refused,
                     label2: data[Attributes.Label2],
-                    label2R: postData[2].accepted ? Text.Accepted : Text.Refused,
+                    label2R: read[2].accepted ? Text.Accepted : Text.Refused,
                     label3: data[Attributes.Label3],
                     turno: data[Attributes.Shift],
                     emails: data.emailList.map((elem) => elem[Attributes.Email]).join(";"),
@@ -127,7 +127,7 @@ const RecepcionAgregar = () => {
         }
 
         // Enviar resultado final
-        Fetch_Next(Label.postLabel, play, nextSave, "post", { data: postData }, { postData })
+        Fetch_Next(Label.postLabel, play, nextSave, "post", { data: postData }, { read })
     }
 
     function check(num) {

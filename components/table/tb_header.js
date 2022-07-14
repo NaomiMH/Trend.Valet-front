@@ -38,7 +38,7 @@ function Table_Header(listHeader) {
         { title: Text.Admin, field: Attributes.Admin, name: 'Admin' },
 
         // EmailList
-        { title: Text.Email, field: Attributes.Email, name: 'Email', editable: 'never' },
+        { title: Text.Email, field: Attributes.Email, name: 'Email', editable: 'onAdd' },
         // { title: Text.Name, field: Attributes.Name, name: 'Name' },
 
         // LabelLog
