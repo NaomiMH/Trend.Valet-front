@@ -40,11 +40,11 @@ const TestScanner = () => {
     return (
         <Layout width={399}>
             <div className="my-3">
-                <h1 className="text-2xl text-gray-800 font-light">Test de Escaner</h1>
+                <h1 className="text-2xl text-gray-800 font-light">{Text.TestLabels}</h1>
                 <div className='my-3'>
-                    <p>Tipo: {type || Text.None}</p>
-                    <p>Leido: {reading || Text.None}</p>
-                    <p>Encontrado: {
+                    <p>{Text.Type}: {type || Text.None}</p>
+                    <p>{Text.Read}: {reading || Text.None}</p>
+                    <p>{Text.Found}: {
                         (type == "error messy" && typeof info != "object") || type == "location" ? info : null
                     }</p>
                     {
@@ -79,7 +79,7 @@ const TestScanner = () => {
                             </>
                         ) : null
                     }
-                    <label>{Text.Scann} {Text.Material}</label>
+                    <label>{Text.Scann} {Text.Label}</label>
                     <div className='my-3'>
                         <In_standard
                             inName={"etiqueta"}

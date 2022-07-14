@@ -22,7 +22,7 @@ const HistoricoEmbarque = () => {
     }
 
     function fetchData() {
-        Fetch_Data(Emb.getAll, play, setEmpty, setData)
+        // Fetch_Data(Emb.getAll, play, setEmpty, setData)
     }
 
     // Load the data
@@ -33,31 +33,31 @@ const HistoricoEmbarque = () => {
     })
 
     // Selected headers (filtered by name)
-    const headers = [
-        "Folio_Recepcion", "Secuencia_Det", "Clave_Material", "Clave_Localidad", "Pallet", "Cantidad_Recibida", "Fecha_Produccion", "Folio_Extra", "Lote", "Fecha_Pallet_Det"
-    ];
+    // const headers = [
+    //     "Folio_Recepcion", "Secuencia_Det", "Clave_Material", "Clave_Localidad", "Pallet", "Cantidad_Recibida", "Fecha_Produccion", "Folio_Extra", "Lote", "Fecha_Pallet_Det"
+    // ];
 
     // Selected Actions (filtered by tooltip)
-    const actions = [
-        Text.Refresh
-    ];
+    // const actions = [
+    //     Text.Refresh
+    // ];
 
     // Saving the Functions (key = actions tooltip)
-    const dict_functions = {}
-    dict_functions[Text.Refresh] = fetchData
+    // const dict_functions = {}
+    // dict_functions[Text.Refresh] = fetchData
 
     return (
         <Layout width={width}>
             <div className="my-3">
                 <h1 className="text-2xl text-gray-800 font-light">{Text.MaterialsShippedHistory}</h1>
                 <div className='my-3'>
-                    <Table_Body
+                    {/* <Table_Body
                         tableTitle={Text.MaterialsShippedHistory}
                         tableData={data}
                         listHeader={headers}
                         listAccion={actions}
                         dictFunctions={dict_functions} //optional
-                    />
+                    /> */}
                 </div>
             </div>
         </Layout>

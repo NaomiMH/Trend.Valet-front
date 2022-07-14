@@ -19,15 +19,25 @@ export const Errors = {
             english: param + "is required"
         }[language]
     },
-    ParameterMissing: (func,param) => {
+    ParameterMissing: (func, param) => {
         return {
             spanish: "Falta el parametro " + param + " de la funcion " + func,
             english: "The parameter " + param + " of the function " + func + "is missing"
         }[language]
     },
+    FunctionMissing: (tooltip) => {
+        return {
+            spanish: "No se envio funcion para " + tooltip,
+            english: "No function send for " + tooltip
+        }[language]
+    },
     FetchConnection: {
         spanish: "Problemas con la conexion a la base de datos",
         english: "Problems connecting to the database"
-    }[language]
+    }[language],
+    EmptyData: {
+        spanish: "No se encontro informacion a mostrar",
+        english: "No data was found"
+    }[language],
     // Temporary: Temporary[language],
 }

@@ -16,6 +16,7 @@ const Sidebar = ({ width, admin }) => {
     ];
 
     const menu_scanner = [
+        { name: Text.TestLabels, link: "/test/etiqueta" },
         { name: Text.CheckLabels, link: "/procesos/recepcion/agregar" },
     ];
 

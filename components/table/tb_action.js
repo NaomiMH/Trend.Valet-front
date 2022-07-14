@@ -16,33 +16,11 @@ function Table_Action(listActions, dictFunctions) {
     };
 
     const actions = [
-        {
-            icon: 'info',
-            tooltip: Text.Details,
-            onClick: (_, rowData) => useFunction(rowData, Text.Details)
-        },
-        {
-            icon: 'check',
-            tooltip: Text.Square,
-            onClick: (_, rowData) => useFunction(rowData, Text.Square)
-        },
-        {
-            icon: 'refresh',
-            tooltip: Text.Refresh,
-            onClick: () => useFunction({}, Text.Refresh),
-            isFreeAction: true
-        },
-        {
-            icon: 'check',
-            tooltip: Text.GlobalSquare,
-            onClick: () => useFunction({}, Text.GlobalSquare),
-            isFreeAction: true
-        },
-        {
-            icon: 'inventory',
-            tooltip: Text.Scann,
-            onClick: (_, rowData) => useFunction(rowData, Text.Scann)
-        }
+        // {
+        //     icon: 'info',
+        //     tooltip: Text.Details,
+        //     onClick: (_, rowData) => useFunction(rowData, Text.Details)
+        // }
     ]
     return (
         actions.filter(({ tooltip }) => listActions.includes(tooltip))

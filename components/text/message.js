@@ -1,10 +1,12 @@
 import language from "."
 
-// const Temporary = {
-//     spanish: "Temporal",
-//     english: "Temporary"
-// }
-
 export const Message = {
-    // Temporary: Temporary[language],
+    FinishFirst: {
+        spanish: "Termine para continuar",
+        english: "Finish to continue"
+    }[language],
+    // FinishFirst: {
+    //     spanish: "Termine para continuar",
+    //     english: "Finish to continue"
+    // }[language],
 }

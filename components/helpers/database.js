@@ -1,10 +1,5 @@
 import { database } from "./databaseUrl"
 
-// export const Conf = {
-//     getAll: database + "/configuracion",
-//     put: database + "/configuracion"
-// }
-
 export const Log = {
     login: database + '/login',
     signup: database + '/signup',
@@ -28,4 +23,8 @@ export const User = {
     getUsers: database + '/user',
     putUser: (user) => database + '/user/' + user,
     deleteUser: (user) => database + '/user/' + user
+}
+
+export const Scanner = {
+    post: database + "/scanner"
 }

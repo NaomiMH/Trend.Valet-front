@@ -30,7 +30,7 @@ const Configuration = () => {
     }
 
     function fetchData() {
-        Fetch_Config({ play, setBox, setHours, setPosition, setSHours })
+        // Fetch_Config({ play, setBox, setHours, setPosition, setSHours })
     }
 
     // Load the data
@@ -50,40 +50,40 @@ const Configuration = () => {
     let inishours = shours
 
     // Values for the Form
-    const FormValues = [
-        {
-            name: Attributes.Default_Posiciones,
-            initialValue: inipos,
-            validation: Yup.number().min(1, Errors.MinNumber).required(Errors.EnterParameter(Text.MaxPositions)),
-            text: Message.Positions,
-            placeholder: Text.Positions,
-            type: "number"
-        },
-        {
-            name: Attributes.Cantidad_Maxima_Cajas,
-            initialValue: inibox,
-            validation: Yup.number().min(1, Errors.MinNumber).required(Errors.EnterParameter(Text.MaxBox)),
-            text: Message.Boxes,
-            placeholder: Text.Boxes,
-            type: "number"
-        },
-        {
-            name: Attributes.Horas_Maximo_Ubicacion,
-            initialValue: inihours,
-            validation: Yup.number().min(1, Errors.MinNumber).required(Errors.EnterParameter(Text.HoursLimit)),
-            text: Message.Hours(Text.Location),
-            placeholder: Text.Hours,
-            type: "number"
-        },
-        {
-            name: Attributes.Horas_Maximo_Embarque,
-            initialValue: inishours,
-            validation: Yup.number().min(1, Errors.MinNumber).required(Errors.EnterParameter(Text.HoursLimit)),
-            text: Message.Hours(Text.Audit),
-            placeholder: Text.Hours,
-            type: "number"
-        }
-    ]
+    // const FormValues = [
+    //     {
+    //         name: Attributes.Default_Posiciones,
+    //         initialValue: inipos,
+    //         validation: Yup.number().min(1, Errors.MinNumber).required(Errors.EnterParameter(Text.MaxPositions)),
+    //         text: Message.Positions,
+    //         placeholder: Text.Positions,
+    //         type: "number"
+    //     },
+    //     {
+    //         name: Attributes.Cantidad_Maxima_Cajas,
+    //         initialValue: inibox,
+    //         validation: Yup.number().min(1, Errors.MinNumber).required(Errors.EnterParameter(Text.MaxBox)),
+    //         text: Message.Boxes,
+    //         placeholder: Text.Boxes,
+    //         type: "number"
+    //     },
+    //     {
+    //         name: Attributes.Horas_Maximo_Ubicacion,
+    //         initialValue: inihours,
+    //         validation: Yup.number().min(1, Errors.MinNumber).required(Errors.EnterParameter(Text.HoursLimit)),
+    //         text: Message.Hours(Text.Location),
+    //         placeholder: Text.Hours,
+    //         type: "number"
+    //     },
+    //     {
+    //         name: Attributes.Horas_Maximo_Embarque,
+    //         initialValue: inishours,
+    //         validation: Yup.number().min(1, Errors.MinNumber).required(Errors.EnterParameter(Text.HoursLimit)),
+    //         text: Message.Hours(Text.Audit),
+    //         placeholder: Text.Hours,
+    //         type: "number"
+    //     }
+    // ]
 
     function nextSubmit(data) {
         if (data.msg) {
@@ -111,11 +111,11 @@ const Configuration = () => {
             <div className="my-3">
                 <h1 className="text-2xl text-gray-800 font-light">{Text.Settings}</h1>
                 <div className='my-3'>
-                    <Form_standard
+                    {/* <Form_standard
                         FlistValues={FormValues}
                         FonSubmit={fSumbit}
                         FNombre={Text.Save}
-                    />
+                    /> */}
                 </div>
             </div>
         </Layout>

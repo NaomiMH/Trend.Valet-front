@@ -37,7 +37,7 @@ export function Fetch_Next(url, play, next, method = "get", data = {}, sendToNex
             }
             if (next) {
                 if (!next instanceof Function) {
-                    Alert_show(Errors.WrongParameter("Fetch_Next", "next"), play)
+                    Alert_show(Errors.ParameterMissing("Fetch_Next", "next"), play)
                 } else {
                     next(res, sendToNext)
                 }
