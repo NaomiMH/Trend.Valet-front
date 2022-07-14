@@ -117,7 +117,7 @@ export const Text = {
         spanish: "Encontrado",
         english: "Found"
     }[language],
-    Read: {
+    Reading: {
         spanish: "Lectura",
         english: "Reading"
     }[language],
@@ -140,6 +140,14 @@ export const Text = {
     Homepage: {
         spanish: "Inicio",
         english: "Homepage"
+    }[language],
+    Read: {
+        spanish: "Leido",
+        english: "Read"
+    }[language],
+    Result: {
+        spanish: "Resultado",
+        english: "Result"
     }[language],
     // Temporary: {
     //     spanish: "",

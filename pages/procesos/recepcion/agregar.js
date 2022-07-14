@@ -3,7 +3,7 @@ import Btn_Standard from '../../../components/buttons/btn_standard';
 import In_standard from '../../../components/input/in_standard';
 import { useState } from 'react';
 import { Attributes } from '../../../components/helpers/consts';
-import { Scanner } from '../../../components/helpers/database';
+import { Label, Scanner } from '../../../components/helpers/database';
 import useSound from 'use-sound';
 import { Alert_path, Alert_show } from '../../../components/alert/alert';
 import { Fetch_Next } from '../../../components/fetch/fetch_next';
@@ -42,7 +42,7 @@ const RecepcionAgregar = () => {
         postData[Attributes.Lectura] = reading
         postData[Attributes.Resultado] = type
         Fetch_Next(Scanner.post, play, () => { }, "post", { data: postData })
-        
+
         if (type == "description") {
             setDescription(info)
             return
@@ -51,11 +51,15 @@ const RecepcionAgregar = () => {
         }
 
         const tempRead = read
-        tempRead[count] = { reading, accepted: 0 }
-        if (count == 1) {
+        tempRead[count] = { reading, info, accepted: 0 }
+        if (count == 3) {
             tempRead[count].accepted = 1
-        } else if (reading == read[1].reading) {
-            tempRead[count].accepted = 1
+            if (tempRead[1].reading == reading) {
+                tempRead[1].accepted = 1
+            }
+            if (tempRead[2].reading == reading) {
+                tempRead[2].accepted = 1
+            }
         }
         setCount(count + 1)
         setRead(tempRead)
@@ -67,25 +71,17 @@ const RecepcionAgregar = () => {
         setRead(defaultRead)
     }
 
+    function nextSave(data) {
+        console.log(data)
+        // resetValues()
+    }
+
     function saveData() {
         // Comprobar resultado final
         const postData = {}
-        if (!read[1].reading) {
-            postData[Attributes.Label1] = "NULL"
-        } else {
-            postData[Attributes.Label1] = read[1].reading
-        }
-        if (!read[2].reading) {
-            postData[Attributes.Label2] = "NULL"
-        } else {
-            postData[Attributes.Label2] = read[2].reading
-        }
-        if (!read[3].reading) {
-            postData[Attributes.Label3] = "NULL"
-        } else {
-            postData[Attributes.Label3] = read[3].reading
-        }
-
+        postData[Attributes.Label1] = read[1].reading
+        postData[Attributes.Label2] = read[2].reading
+        postData[Attributes.Label3] = read[3].reading
         if (read[1].accepted && read[2].accepted && read[3].accepted) {
             postData[Attributes.Result] = 1
         } else {
@@ -93,12 +89,26 @@ const RecepcionAgregar = () => {
         }
 
         // Enviar resultado final
-        console.log(postData)
-        // Fetch_Next()
+        Fetch_Next(Label.postLabel, play, nextSave, "post", { data: postData })
     }
 
     function check(num) {
-        if (count > num) {
+        if (count > 3) {
+            if (num == 4) {
+                if (read[1].accepted && read[2].accepted && read[3].accepted) {
+                    return (
+                        <p className='text-green-600 font-bold'>
+                            {Text.Accepted}
+                        </p>
+                    )
+                } else {
+                    return (
+                        <p className='text-red-600 font-bold'>
+                            {Text.Refused}
+                        </p>
+                    )
+                }
+            }
             if (read[num].accepted) {
                 return (
                     <p className='text-green-600 font-bold'>
@@ -112,6 +122,15 @@ const RecepcionAgregar = () => {
                 </p>
             )
         }
+        if (count > num) {
+            if (read[num].reading) {
+                return (
+                    <p className='text-yellow-600 font-bold'>
+                        {Text.Read}
+                    </p>
+                )
+            }
+        }
         return <p>{Text.None}</p>
     }
 
@@ -120,14 +139,19 @@ const RecepcionAgregar = () => {
             <div className="my-3">
                 <h1 className="text-2xl text-gray-800 font-light">{Text.ReceiveMaterials}</h1>
                 <div className='my-3'>
-                    <p>{Text.Read} #1: {check(1)}</p>
-                    <p>{Text.Read} #2: {check(2)}</p>
-                    <p>{Text.Read} #3: {check(3)}</p>
-                    <label>{Text.Scann} {Text.Material}</label>
-                    <In_standard
-                        inName={"etiqueta"}
-                        inPlaceHolder={Text.SelectScann}
-                        onChange={saveChange} />
+                    <p>{Message.FirstLabel}: {check(1)}</p>
+                    <p>{Message.SecondLabel}: {check(2)}</p>
+                    <p>{Message.ThirdLabel}: {check(3)}</p>
+                    <p>{Text.Result}: {check(4)}</p>
+                    {count < 4 ? (
+                        <>
+                            <label className='font-bold'>{Text.Scann} {count == 1 ? Message.FirstLabel : count == 2 ? Message.SecondLabel : Message.ThirdLabel}</label>
+                            <In_standard
+                                inName={"etiqueta"}
+                                inPlaceHolder={Text.SelectScann}
+                                onChange={saveChange} />
+                        </>
+                    ) : null}
                     <div className='text-right'>
                         <Btn_Standard btnName={Text.Finish} btnClick={saveData} />
                     </div>
