@@ -7,23 +7,28 @@ function Table_Action(listActions, dictFunctions) {
     // Save sound
     const [play] = useSound(Alert_path);
 
-    function useFunction(rowData, tooltip) {
-        if (dictFunctions[tooltip]) {
-            dictFunctions[tooltip](rowData);
+    function useFunction(rowData, name) {
+        if (dictFunctions[name]) {
+            dictFunctions[name](rowData);
         } else {
-            Alert_show(Errors.FunctionMissing(tooltip), play);
+            Alert_show(Errors.FunctionMissing(name), play);
         }
     };
 
     const actions = [
-        // {
-        //     icon: 'info',
-        //     tooltip: Text.Details,
-        //     onClick: (_, rowData) => useFunction(rowData, Text.Details)
-        // }
+        // Default
+        {
+            icon: 'refresh',
+            tooltip: Text.Refresh,
+            onClick: () => useFunction({}, 'Refrescar'),
+            isFreeAction: true,
+            name: 'Refrescar'
+        },
+
+        // Personalizar
     ]
     return (
-        actions.filter(({ tooltip }) => listActions.includes(tooltip))
+        actions.filter(({ name }) => listActions.includes(name))
     );
 }
 

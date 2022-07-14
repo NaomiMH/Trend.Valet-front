@@ -13,6 +13,7 @@ const Admin = {
 // }
 
 export const Errors = {
+    // Requerido
     Require: (param) => {
         return {
             spanish: "Se requiere " + param,
@@ -38,6 +39,16 @@ export const Errors = {
     EmptyData: {
         spanish: "No se encontro informacion a mostrar",
         english: "No data was found"
+    }[language],
+    MissingData: {
+        spanish: "Faltan datos",
+        english: "Missing data"
+    }[language],
+
+    // Personalizado
+    MissingEmails: {
+        spanish: "No hay emails registrados",
+        english: "There are no registered emails"
     }[language],
     // Temporary: Temporary[language],
 }

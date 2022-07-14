@@ -3,6 +3,9 @@
 # database url
 /components/helpers/databaseUrl.js
 
+# gmail authorization
+/components/email/email.js
+
 # dependencies
 /node_modules
 /.pnp

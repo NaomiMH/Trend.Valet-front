@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import MaterialTable from 'material-table';
 import Table_Header from './tb_header';
 import Table_Action from './tb_action';
-import { Attributes } from '../helpers/consts';
-import { Alert_path } from '../alert/alert';
-import useSound from 'use-sound';
 import { Text } from '../text/text';
-import { Fetch_Config } from '../fetch/fetch_config';
-import Get_Position from '../helpers/get_position';
 
 // Example
 {
@@ -46,7 +41,7 @@ import Get_Position from '../helpers/get_position';
     //     "Folio_Recepcion"
     // ];
 
-    // Selected Actions (filtered by tooltip)
+    // Selected Actions (filtered by name)
     // const actions = [
     //     "Detalles", "Refrescar"
     // ];
@@ -59,7 +54,15 @@ import Get_Position from '../helpers/get_position';
     //         onRowDelete: (row) => new Promise((res, rej) => {
     //             deleteMaterial(row)
     //             res([])
-    //         })
+    //         }),
+    //         onRowAdd: (row) => new Promise((res, rej) => {
+    //             addMaterial(row)
+    //             res([])
+    //         }),
+    //         onRowUpdate: (newRow, oldRow) => new Promise((res, rej) => {
+    //             updateMaterial(newRow, oldRow)
+    //             res([])
+    //         }),
     //     },
     //     "delete": "Regresar"
     // }
@@ -73,26 +76,6 @@ import Get_Position from '../helpers/get_position';
  /> */}
 }
 const Table_Body = ({ tableTitle, tableData, listHeader, listAccion, dictFunctions = {}, btoolbar = true }) => {
-    // Save configuration
-    const [hours, setHours] = useState(0)
-    const [shours, setSHours] = useState(0)
-    // Empty data (dont reload)
-    const [empty, setEmpty] = useState(false)
-    // Save sound
-    const [play] = useSound(Alert_path);
-
-    function fetchData() {
-        Fetch_Config({ play, setHours, setSHours })
-    }
-
-    // Load the data
-    useEffect(() => {
-        if (!hours && !shours && !empty) {
-            setEmpty(true)
-            fetchData()
-        }
-    })
-
     const tableHeader = Table_Header(listHeader);
     const tableAction = Table_Action(listAccion, dictFunctions);
 
@@ -107,51 +90,7 @@ const Table_Body = ({ tableTitle, tableData, listHeader, listAccion, dictFunctio
                     zIndex: 8
                 },
                 exportButton: true,
-                exportAllData: true,
-                rowStyle: rowData => {
-                    let result = {}
-                    // Set red for Count == 0
-                    if ("Count" in rowData) {
-                        if (rowData["Count"] == 0) {
-                            result.backgroundColor = '#EBC34B'
-                        }
-                    }
-                    // Set red when limitTime is exceeded 
-                    if (Attributes.Fecha_Hora_Recepcion in rowData) {
-                        if (rowData[Attributes.Fecha_Hora_Recepcion]) {
-                            let limitTime = hours * 60 * 60 * 1000
-                            let tempTime = rowData[Attributes.Fecha_Hora_Recepcion]
-                                .replace('T', ' ').replace('Z', '').slice(0, Get_Position(rowData[Attributes.Fecha_Hora_Recepcion],".",1))
-                            if (new Date - new Date(tempTime) > limitTime) {
-                                if ("CountLocation" in rowData) {
-                                    if (rowData["CountLocation"] != 0) {
-                                        result.backgroundColor = '#F7664D'
-                                    }
-                                } else {
-                                    result.backgroundColor = '#F7664D'
-                                }
-                            }
-                        }
-                    }
-                    // Set red when limitTime is exceeded 
-                    if (Attributes.Fecha_Hora_Embarque in rowData) {
-                        if (rowData[Attributes.Fecha_Hora_Embarque]) {
-                            let limitTime = shours * 60 * 60 * 1000
-                            let tempTime = rowData[Attributes.Fecha_Hora_Embarque]
-                                .replace('T', ' ').replace('Z', '').slice(0, Get_Position(rowData[Attributes.Fecha_Hora_Embarque],".",1))
-                            if (new Date - new Date(tempTime) > limitTime) {
-                                result.backgroundColor = '#F7664D'
-                            }
-                        }
-                    }
-                    // Set red when there is an invalid amount
-                    if ('Errors' in rowData) {
-                        if (rowData['Errors'] != 0) {
-                            result.backgroundColor = '#F7664D'
-                        }
-                    }
-                    return result
-                }
+                exportAllData: true
             }}
             columns={tableHeader}
             data={tableData}

@@ -1,9 +1,18 @@
 import language from "."
 
 export const Text = {
+    // Sidebar (Editable)
     System: {
         spanish: "Sistema",
         english: "System"
+    }[language],
+    Users: {
+        spanish: "Usuarios",
+        english: "Users"
+    }[language],
+    Emails: {
+        spanish: "Emails",
+        english: "Emails"
     }[language],
     Processes: {
         spanish: "Procesos",
@@ -12,10 +21,6 @@ export const Text = {
     Queries: {
         spanish: "Consultas",
         english: "Queries"
-    }[language],
-    Settings: {
-        spanish: "Configuraciones",
-        english: "Settings"
     }[language],
     TestLabels: {
         spanish: "Test de Etiquetas",
@@ -29,14 +34,44 @@ export const Text = {
         spanish: "Historial de Etiquetas",
         english: "Labels History"
     }[language],
+
+    // Attributos en Tabla (Editable)
+    Email: {
+        spanish: "Correo",
+        english: "Email"
+    }[language],
+    Label1: {
+        spanish: "Primera Etiqueta",
+        english: "First Label"
+    }[language],
+    Label2: {
+        spanish: "Ultima Etiqueta",
+        english: "Last Label"
+    }[language],
+    Label3: {
+        spanish: "Etiqueta de Ficha",
+        english: "Token Label"
+    }[language],
+    Date: {
+        spanish: "Fecha",
+        english: "Date"
+    }[language],
+    Shift: {
+        spanish: "Turno",
+        english: "Shift"
+    }[language],
+
+    // Components
     Hello: {
         spanish: "Hola",
         english: "Hello"
     }[language],
-    Login: {
-        spanish: "Iniciar Sesion",
-        english: "Login"
+    Signoff: {
+        spanish: "Cerrar Sesion",
+        english: "Signoff"
     }[language],
+
+    // Usuarios
     Username: {
         spanish: "Usuario",
         english: "Username"
@@ -45,14 +80,42 @@ export const Text = {
         spanish: "Contraseña",
         english: "Password"
     }[language],
-    Signoff: {
-        spanish: "Cerrar Sesion",
-        english: "Signoff"
+    Login: {
+        spanish: "Iniciar Sesion",
+        english: "Login"
     }[language],
+    Admin: {
+        spanish: "Administrador",
+        english: "Administrator"
+    }[language],
+    Name: {
+        spanish: "Nombre",
+        english: "Name"
+    }[language],
+
+    // Paginas (Dafault)
     None: {
         spanish: "Ninguno",
         english: "None"
     }[language],
+    Delete: {
+        spanish: "Borrar",
+        english: "Delete"
+    }[language],
+    Finish: {
+        spanish: "Terminar",
+        english: "Finish"
+    }[language],
+    Error: {
+        spanish: "Error",
+        english: "Error"
+    }[language],
+    Homepage: {
+        spanish: "Inicio",
+        english: "Homepage"
+    }[language],
+
+    // Paginas (Escaner)
     Scann: {
         spanish: "Escanee",
         english: "Scann"
@@ -60,10 +123,6 @@ export const Text = {
     SelectScann: {
         spanish: "Seleccionar y escanear",
         english: "Select and Scan"
-    }[language],
-    Delete: {
-        spanish: "Borrar",
-        english: "Delete"
     }[language],
     Material: {
         spanish: "Material",
@@ -109,22 +168,20 @@ export const Text = {
         spanish: "Descripcion de Material",
         english: "Material Description"
     }[language],
-    Finish: {
-        spanish: "Terminar",
-        english: "Finish"
-    }[language],
     Found: {
         spanish: "Encontrado",
         english: "Found"
-    }[language],
-    Reading: {
-        spanish: "Lectura",
-        english: "Reading"
     }[language],
     Type: {
         spanish: "Tipo",
         english: "Type"
     }[language],
+    Read: {
+        spanish: "Leido",
+        english: "Read"
+    }[language],
+
+    // Paginas (Editable)
     Accepted: {
         spanish: "Aceptado",
         english: "Accepted"
@@ -132,18 +189,6 @@ export const Text = {
     Refused: {
         spanish: "Rechazado",
         english: "Refused"
-    }[language],
-    Error: {
-        spanish: "Error",
-        english: "Error"
-    }[language],
-    Homepage: {
-        spanish: "Inicio",
-        english: "Homepage"
-    }[language],
-    Read: {
-        spanish: "Leido",
-        english: "Read"
     }[language],
     Result: {
         spanish: "Resultado",

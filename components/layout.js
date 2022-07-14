@@ -41,6 +41,12 @@ const Layout = ({ children, width }) => {
         return "Loading..."
     }
 
+    if (typeof window !== 'undefined') {
+        if (!localStorage.getItem('Name')) {
+            localStorage.setItem('Name', data[Attributes.Name])
+        }
+    }
+
     return (
         <div className="flex flex-col md:flex-row min-h-screen">
             <Sidebar width={width} admin={data[Attributes.Admin]} />

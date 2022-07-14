@@ -10,6 +10,8 @@ import { Fetch_Next } from '../../../components/fetch/fetch_next';
 import { Scanner_Reading } from '../../../components/scanner/scanner_reading';
 import { Text } from '../../../components/text/text';
 import { Message } from '../../../components/text/message';
+import { Errors } from '../../../components/text/error';
+import { Send_Email } from '../../../components/email/send_email';
 
 const RecepcionAgregar = () => {
     // Default Read
@@ -41,7 +43,7 @@ const RecepcionAgregar = () => {
         const postData = {}
         postData[Attributes.Lectura] = reading
         postData[Attributes.Resultado] = type
-        Fetch_Next(Scanner.post, play, () => { }, "post", { data: postData })
+        // Fetch_Next(Scanner.post, play, () => { }, "post", { data: postData })
 
         if (type == "description") {
             setDescription(info)
@@ -71,12 +73,48 @@ const RecepcionAgregar = () => {
         setRead(defaultRead)
     }
 
-    function nextSave(data) {
-        console.log(data)
+    async function nextSave(data, { postData }) {
+        if ("emailList" in data) {
+            if ("msg" in data.emailList) {
+                Alert_show(data.email.msg, play)
+            }
+
+            if (!data[Attributes.Result]) {
+                const name = localStorage.getItem('Name')
+                if (!name) {
+                    Alert_show(Errors.ParameterMissing('nextSave', Attributes.Name))
+                    return
+                }
+
+                if (data.emailList.length == 0) {
+                    Alert_show(Errors.MissingEmails)
+                    return
+                }
+
+                const templateParams = {
+                    name,
+                    fecha: data[Attributes.Date],
+                    label1: data[Attributes.Label1],
+                    label1R: postData[1].accepted ? Text.Accepted : Text.Refused,
+                    label2: data[Attributes.Label2],
+                    label2R: postData[2].accepted ? Text.Accepted : Text.Refused,
+                    label3: data[Attributes.Label3],
+                    turno: data[Attributes.Shift],
+                    emails: data.emailList.map((elem) => elem[Attributes.Email]).join(";"),
+                }
+
+                Send_Email(templateParams, play)
+            }
+        }
         // resetValues()
     }
 
     function saveData() {
+        if (count != 4) {
+            Alert_show(Errors.MissingData, play)
+            return
+        }
+
         // Comprobar resultado final
         const postData = {}
         postData[Attributes.Label1] = read[1].reading
@@ -89,7 +127,7 @@ const RecepcionAgregar = () => {
         }
 
         // Enviar resultado final
-        Fetch_Next(Label.postLabel, play, nextSave, "post", { data: postData })
+        Fetch_Next(Label.postLabel, play, nextSave, "post", { data: postData }, { postData })
     }
 
     function check(num) {
@@ -121,12 +159,14 @@ const RecepcionAgregar = () => {
                 </p>
             )
         }
-        if (read[num].reading) {
-            return (
-                <p className='text-yellow-600 font-bold'>
-                    {Text.Read}
-                </p>
-            )
+        if (count > num) {
+            if (read[num].reading) {
+                return (
+                    <p className='text-yellow-600 font-bold'>
+                        {Text.Read}
+                    </p>
+                )
+            }
         }
         return <p>{Text.None}</p>
     }
@@ -134,7 +174,7 @@ const RecepcionAgregar = () => {
     return (
         <Layout width={399}>
             <div className="my-3">
-                <h1 className="text-2xl text-gray-800 font-light">{Text.ReceiveMaterials}</h1>
+                <h1 className="text-2xl text-gray-800 font-light">{Text.CheckLabels}</h1>
                 <div className='my-3'>
                     <p>{Message.FirstLabel}: {check(1)}</p>
                     <p>{Message.SecondLabel}: {check(2)}</p>
