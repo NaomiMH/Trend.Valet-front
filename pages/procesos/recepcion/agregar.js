@@ -44,7 +44,7 @@ const RecepcionAgregar = () => {
         const postData = {}
         postData[Attributes.Lectura] = reading
         postData[Attributes.Resultado] = type
-        // Fetch_Next(Scanner.post, play, () => { }, "post", { data: postData })
+        Fetch_Next(Scanner.post, play, () => { }, "post", { data: postData })
 
         if (type == "description") {
             setDescription(info)
