@@ -92,7 +92,7 @@ const RecepcionAgregar = () => {
                 }
 
                 const templateParams = {
-                    name,
+                    nombre: name,
                     fecha: data[Attributes.Date],
                     label1: data[Attributes.Label1],
                     label1R: read[1].accepted ? Text.Accepted : Text.Refused,
@@ -103,10 +103,10 @@ const RecepcionAgregar = () => {
                     emails: data.emailList.map((elem) => elem[Attributes.Email]).join(";"),
                 }
 
-                Send_Email(templateParams, play)
+                await Send_Email(templateParams, play)
             }
         }
-        // resetValues()
+        resetValues()
     }
 
     function saveData() {

@@ -42,9 +42,8 @@ const Layout = ({ children, width }) => {
     }
 
     if (typeof window !== 'undefined') {
-        if (!localStorage.getItem('Name')) {
-            localStorage.setItem('Name', data[Attributes.Name])
-        }
+        localStorage.setItem('Name', data[Attributes.Name])
+        localStorage.setItem('Admin', data[Attributes.Admin])
     }
 
     return (

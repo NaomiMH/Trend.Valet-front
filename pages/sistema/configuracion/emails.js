@@ -68,7 +68,6 @@ const Emails = () => {
                 res([])
             }),
         },
-        "delete": "Regresar"
     }
 
     return (
@@ -77,7 +76,7 @@ const Emails = () => {
                 <h1 className="text-2xl text-gray-800 font-light">{Text.Emails}</h1>
                 <div className='my-3'>
                     <Table_Body
-                        tableTitle={"Something"}
+                        tableTitle={Text.Emails}
                         tableData={data}
                         listHeader={headers}
                         listAccion={actions}

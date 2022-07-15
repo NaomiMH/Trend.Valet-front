@@ -59,7 +59,6 @@ const Users = () => {
                 res([])
             }),
         },
-        "delete": "Regresar"
     }
 
     return (
@@ -68,7 +67,7 @@ const Users = () => {
                 <h1 className="text-2xl text-gray-800 font-light">{Text.Users}</h1>
                 <div className='my-3'>
                     <Table_Body
-                        tableTitle={"Something"}
+                        tableTitle={Text.Users}
                         tableData={data}
                         listHeader={headers}
                         listAccion={actions}

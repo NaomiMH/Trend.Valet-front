@@ -1,28 +1,25 @@
-import Layout from '../../../components/Layout';
-import Table_Body from '../../../components/table/tb_body';
-import { useEffect, useState } from 'react';
-import { Emb } from '../../../components/helpers/database';
-import useSound from 'use-sound';
-import { Alert_path } from '../../../components/alert/alert';
-import { Fetch_Data } from '../../../components/fetch/fetch_data';
-import { Text } from '../../../components/text/text';
+import { useEffect, useState } from "react";
+import useSound from "use-sound";
+import { Alert_path } from "../../../components/alert/alert";
+import { Fetch_Data } from "../../../components/fetch/fetch_data";
+import { Fetch_Next } from "../../../components/fetch/fetch_next";
+import { Attributes } from "../../../components/helpers/consts";
+import { Email, Label } from "../../../components/helpers/database";
+import Layout from "../../../components/Layout"
+import Table_Body from "../../../components/table/tb_body";
+import { Text } from "../../../components/text/text"
 
-const HistoricoEmbarque = () => {
+const LabelHistory = () => {
     // Save the information
-    let [data, setData] = useState([]);
+    const [data, setData] = useState([]);
     // Empty data (dont reload)
-    let [empty, setEmpty] = useState(false)
+    const [empty, setEmpty] = useState(false)
     // Save sound
     const [play] = useSound(Alert_path);
-    // Width screen
-    const [width, setWidth] = useState(undefined);
-
-    if (typeof window != "undefined" && !width) {
-        setWidth(window.screen.width)
-    }
+    let Admin = 0
 
     function fetchData() {
-        // Fetch_Data(Emb.getAll, play, setEmpty, setData)
+        Fetch_Data(Label.getLabels, play, setEmpty, setData)
     }
 
     // Load the data
@@ -32,36 +29,55 @@ const HistoricoEmbarque = () => {
         }
     })
 
+    function deleteMaterial(row) {
+        Fetch_Next(Label.deleteLabel(row[Attributes.Date]), play, fetchData, "delete")
+    }
+
+    if (typeof window !== 'undefined') {
+        // Permissions
+        Admin = localStorage.getItem('Admin')
+    }
+
     // Selected headers (filtered by name)
-    // const headers = [
-    //     "Folio_Recepcion", "Secuencia_Det", "Clave_Material", "Clave_Localidad", "Pallet", "Cantidad_Recibida", "Fecha_Produccion", "Folio_Extra", "Lote", "Fecha_Pallet_Det"
-    // ];
+    const headers = [
+        "Label1", "Label2", "Label3", "Date", "Username", "Shift"
+    ];
 
-    // Selected Actions (filtered by tooltip)
-    // const actions = [
-    //     Text.Refresh
-    // ];
+    // Selected Actions (filtered by name)
+    const actions = [
+        "Refrescar"
+    ];
 
-    // Saving the Functions (key = actions tooltip)
-    // const dict_functions = {}
-    // dict_functions[Text.Refresh] = fetchData
+    // Saving the Functions (key = actions name)
+    const dict_functions = {
+        "Refrescar": fetchData
+    }
+
+    if (Admin) {
+        dict_functions["editable"] = {
+            onRowDelete: (row) => new Promise((res, rej) => {
+                deleteMaterial(row)
+                res([])
+            }),
+        }
+    }
 
     return (
-        <Layout width={width}>
+        <Layout>
             <div className="my-3">
-                <h1 className="text-2xl text-gray-800 font-light">{Text.MaterialsShippedHistory}</h1>
+                <h1 className="text-2xl text-gray-800 font-light">{Text.HistoryLabels}</h1>
                 <div className='my-3'>
-                    {/* <Table_Body
-                        tableTitle={Text.MaterialsShippedHistory}
+                    <Table_Body
+                        tableTitle={Text.HistoryLabels}
                         tableData={data}
                         listHeader={headers}
                         listAccion={actions}
                         dictFunctions={dict_functions} //optional
-                    /> */}
+                    />
                 </div>
             </div>
         </Layout>
     )
 }
 
-export default HistoricoEmbarque
+export default LabelHistory

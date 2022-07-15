@@ -45,7 +45,14 @@ function Table_Header(listHeader) {
         { title: Text.Label1, field: Attributes.Label1, name: 'Label1' },
         { title: Text.Label2, field: Attributes.Label2, name: 'Label2' },
         { title: Text.Label3, field: Attributes.Label3, name: 'Label3' },
-        { title: Text.Date, field: Attributes.Date, name: 'Date' },
+        {
+            title: Text.Date, field: Attributes.Date, name: 'Date',
+            render: (rowData) => {
+                return (rowData[Attributes.Date] ?
+                    rowData[Attributes.Date].replace("T", " ").slice(0, Get_Position(rowData[Attributes.Date], ".", 1))
+                    : null)
+            }
+        },
         { title: Text.Shift, field: Attributes.Shift, name: 'Shift' },
         { title: Text.Result, field: Attributes.Result, name: 'Result' },
         // { title: Text.Username, field: Attributes.Username, name: 'Username' },

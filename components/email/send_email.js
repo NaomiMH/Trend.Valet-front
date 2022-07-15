@@ -4,7 +4,7 @@ import emailjs from '@emailjs/browser'
 import { publicKey, serviceID, templateID } from "./email"
 import { Message } from "../text/message"
 
-export function Send_Email(templateParams, play ) {
+export async function Send_Email(templateParams, play ) {
     if (!play) {
         alert(Errors.ParameterMissing("Send_Email", "play"))
         return
@@ -13,7 +13,7 @@ export function Send_Email(templateParams, play ) {
         Alert_show(Errors.ParameterMissing("Send_Email", "templateParams"), play)
         return
     }
-    emailjs.send(serviceID, templateID, templateParams, publicKey)
+    await emailjs.send(serviceID, templateID, templateParams, publicKey)
     .then((res) => {
         console.log(res)
         Alert_show(Message.Success, play)
