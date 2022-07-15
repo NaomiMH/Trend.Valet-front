@@ -1,5 +1,4 @@
 import language from "."
-import { Text } from "./text"
 
 const Admin = {
     spanish: "Requiere al Administrador de Sistemas.",

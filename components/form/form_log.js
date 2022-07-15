@@ -1,8 +1,8 @@
-import { React } from 'react';
 import { useFormik } from 'formik';
+import { React } from 'react';
 import * as Yup from 'yup';
-import { Text } from '../text/text';
 import Btn_Log from '../buttons/btn_log';
+import { Text } from '../text/text';
 
 // Example
 {

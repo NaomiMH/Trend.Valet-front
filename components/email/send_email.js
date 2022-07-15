@@ -1,10 +1,10 @@
+import emailjs from '@emailjs/browser'
 import { Alert_show } from "../alert/alert"
 import { Errors } from "../text/error"
-import emailjs from '@emailjs/browser'
-import { publicKey, serviceID, templateID } from "./email"
 import { Message } from "../text/message"
+import { publicKey, serviceID, templateID } from "./email"
 
-export async function Send_Email(templateParams, play ) {
+export async function Send_Email(templateParams, play) {
     if (!play) {
         alert(Errors.ParameterMissing("Send_Email", "play"))
         return
@@ -14,12 +14,12 @@ export async function Send_Email(templateParams, play ) {
         return
     }
     await emailjs.send(serviceID, templateID, templateParams, publicKey)
-    .then((res) => {
-        console.log(res)
-        Alert_show(Message.Success, play)
-    })
-    .catch((e) => {
-        console.log(e)
-        Alert_show(Errors.FetchConnection, play)
-    })
+        .then((res) => {
+            console.log(res)
+            Alert_show(Message.Success, play)
+        })
+        .catch((e) => {
+            console.log(e)
+            Alert_show(Errors.FetchConnection, play)
+        })
 }

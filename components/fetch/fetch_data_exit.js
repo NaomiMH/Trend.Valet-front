@@ -1,5 +1,5 @@
-import { Alert_show } from "../alert/alert"
 import Router from 'next/router';
+import { Alert_show } from "../alert/alert";
 import { Errors } from "../text/error";
 
 export function Fetch_Data_Exit(url, play, setData, urlBack) {

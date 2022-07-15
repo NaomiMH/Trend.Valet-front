@@ -1,17 +1,17 @@
-import Layout from '../../../components/Layout';
-import Btn_Standard from '../../../components/buttons/btn_standard';
-import In_standard from '../../../components/input/in_standard';
 import { useState } from 'react';
-import { Attributes } from '../../../components/helpers/consts';
-import { Label, Scanner } from '../../../components/helpers/database';
 import useSound from 'use-sound';
 import { Alert_path, Alert_show } from '../../../components/alert/alert';
-import { Fetch_Next } from '../../../components/fetch/fetch_next';
-import { Scanner_Reading } from '../../../components/scanner/scanner_reading';
-import { Text } from '../../../components/text/text';
-import { Message } from '../../../components/text/message';
-import { Errors } from '../../../components/text/error';
+import Btn_Standard from '../../../components/buttons/btn_standard';
 import { Send_Email } from '../../../components/email/send_email';
+import { Fetch_Next } from '../../../components/fetch/fetch_next';
+import { Attributes } from '../../../components/helpers/consts';
+import { Label } from '../../../components/helpers/database';
+import In_standard from '../../../components/input/in_standard';
+import Layout from '../../../components/Layout';
+import { Scanner_Reading } from '../../../components/scanner/scanner_reading';
+import { Errors } from '../../../components/text/error';
+import { Message } from '../../../components/text/message';
+import { Text } from '../../../components/text/text';
 
 const RecepcionAgregar = () => {
     // Default Read
@@ -73,7 +73,7 @@ const RecepcionAgregar = () => {
         setRead(defaultRead)
     }
 
-    async function nextSave(data, {read}) {
+    async function nextSave(data, { read }) {
         if ("emailList" in data) {
             if ("msg" in data.emailList) {
                 Alert_show(data.email.msg, play)

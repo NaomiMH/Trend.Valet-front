@@ -1,8 +1,8 @@
+import Image from "next/image";
+import { useRouter } from 'next/router';
 import React from 'react';
 import Btn_Standard from './buttons/btn_standard';
-import Image from "next/image";
 import { Text } from './text/text';
-import { useRouter } from 'next/router';
 
 const Header = ({ width, name }) => {
     // Scale of the logo

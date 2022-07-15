@@ -1,13 +1,12 @@
-import Sidebar from "./sidebar";
-import Header from "./header";
 import { useRouter } from "next/router";
-import Alert_global from "./alert/alert_global";
-import { Fetch_Data_Exit } from "./fetch/fetch_data_exit";
-import { Log } from "./helpers/database";
+import { useEffect, useState } from "react";
 import useSound from "use-sound";
 import { Alert_path } from "./alert/alert";
-import { useEffect, useState } from "react";
+import { Fetch_Data_Exit } from "./fetch/fetch_data_exit";
+import Header from "./header";
 import { Attributes } from "./helpers/consts";
+import { Log } from "./helpers/database";
+import Sidebar from "./sidebar";
 
 const Layout = ({ children, width }) => {
     // Get the router
@@ -50,9 +49,6 @@ const Layout = ({ children, width }) => {
         <div className="flex flex-col md:flex-row min-h-screen">
             <Sidebar width={width} admin={data[Attributes.Admin]} />
             <main className="w-full md:w-3/4 xl:w-6/7 md:min-h-screen">
-                {width < 400 ? null : (
-                    <Alert_global />
-                )}
                 <div className="m-5">
                     <Header width={width} name={data[Attributes.Name]} />
                     {children}

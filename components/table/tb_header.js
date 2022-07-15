@@ -1,4 +1,3 @@
-import React from 'react';
 import { Attributes } from '../helpers/consts';
 import Get_Position from '../helpers/get_position';
 import { Text } from '../text/text';

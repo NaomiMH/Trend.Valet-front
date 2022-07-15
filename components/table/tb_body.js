@@ -1,8 +1,8 @@
-import React from 'react';
 import MaterialTable from 'material-table';
-import Table_Header from './tb_header';
-import Table_Action from './tb_action';
+import React from 'react';
 import { Text } from '../text/text';
+import Table_Action from './tb_action';
+import Table_Header from './tb_header';
 
 // Example
 {

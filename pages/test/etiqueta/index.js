@@ -1,10 +1,10 @@
-import Layout from '../../../components/Layout';
-import Btn_Standard from '../../../components/buttons/btn_standard';
-import In_standard from '../../../components/input/in_standard';
 import { useState } from 'react';
+import Btn_Standard from '../../../components/buttons/btn_standard';
+import { Attributes } from '../../../components/helpers/consts';
+import In_standard from '../../../components/input/in_standard';
+import Layout from '../../../components/Layout';
 import { Scanner_Reading } from '../../../components/scanner/scanner_reading';
 import { Text } from '../../../components/text/text';
-import { Attributes } from '../../../components/helpers/consts';
 
 const TestScanner = () => {
     // Info of reading
