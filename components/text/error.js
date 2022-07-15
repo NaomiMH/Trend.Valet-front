@@ -43,6 +43,10 @@ export const Errors = {
         spanish: "Faltan datos",
         english: "Missing data"
     }[language],
+    ErrorLabel: {
+        spanish: "AVISO: Etiqueta invalida. Realice un test de la Etiqueta.",
+        english: "WARNING: Invalid tag. Take a test of the Label."
+    }[language],
 
     // Personalizado
     MissingEmails: {

@@ -18,7 +18,8 @@ const RecepcionAgregar = () => {
     const defaultRead = {
         1: {},
         2: {},
-        3: {}
+        3: {},
+        error: 0
     }
 
     // Count
@@ -53,7 +54,13 @@ const RecepcionAgregar = () => {
         }
 
         const tempRead = read
-        tempRead[count] = { reading, info, accepted: 0 }
+        tempRead[count] = { reading, info, accepted: 0, error: 0 }
+        if (type == "error messy" || type == "error unknown") {
+            Alert_show(Errors.ErrorLabel, play)
+            tempRead["error"] = 1
+            tempRead[count]["error"] = 1
+        }
+
         if (count == 3) {
             tempRead[count].accepted = 1
             if (tempRead[1].info[Attributes.Clave_Material] == info[Attributes.Clave_Material]) {
@@ -79,7 +86,7 @@ const RecepcionAgregar = () => {
                 Alert_show(data.email.msg, play)
             }
 
-            if (!data[Attributes.Result]) {
+            if (!data[Attributes.Result] || read["error"]) {
                 const name = localStorage.getItem('Name')
                 if (!name) {
                     Alert_show(Errors.ParameterMissing('nextSave', Attributes.Name))
@@ -94,11 +101,13 @@ const RecepcionAgregar = () => {
                 const templateParams = {
                     nombre: name,
                     fecha: data[Attributes.Date],
+                    error: read["error"] ? Errors.ErrorLabel : "",
                     label1: data[Attributes.Label1],
-                    label1R: read[1].accepted ? Text.Accepted : Text.Refused,
+                    label1R: read[1].accepted && !read[1]["error"] ? Text.Accepted : Text.Refused,
                     label2: data[Attributes.Label2],
-                    label2R: read[2].accepted ? Text.Accepted : Text.Refused,
+                    label2R: read[2].accepted && !read[2]["error"] ? Text.Accepted : Text.Refused,
                     label3: data[Attributes.Label3],
+                    label3R: !read[3]["error"] ? "" : Text.Refused,
                     turno: data[Attributes.Shift],
                     emails: data.emailList.map((elem) => elem[Attributes.Email]).join(";"),
                 }
@@ -133,7 +142,7 @@ const RecepcionAgregar = () => {
     function check(num) {
         if (count > 3) {
             if (num == 4) {
-                if (read[1].accepted && read[2].accepted && read[3].accepted) {
+                if (read[1].accepted && read[2].accepted && read[3].accepted && !read["error"]) {
                     return (
                         <p className='text-green-600 font-bold'>
                             {Text.Accepted}
@@ -146,7 +155,7 @@ const RecepcionAgregar = () => {
                     </p>
                 )
             }
-            if (read[num].accepted) {
+            if (read[num].accepted && !read[num].error) {
                 return (
                     <p className='text-green-600 font-bold'>
                         {Text.Accepted}
