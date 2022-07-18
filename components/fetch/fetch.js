@@ -1,7 +1,7 @@
 import { Alert_show } from "../alert/alert"
 import { Errors } from "../text/error"
 
-export function Fetch_Next(url, play, next, method = "get", data = {}, sendToNext = null) {
+export function Fetch(url, play, next, method = "get", data = {}, sendToNext = null) {
     if (!play) {
         alert(Errors.ParameterMissing("Fetch_Next", "play"))
         return
@@ -32,18 +32,11 @@ export function Fetch_Next(url, play, next, method = "get", data = {}, sendToNex
     fetch(url, temp)
         .then((res) => res.json())
         .then((res) => {
-            if (!(res instanceof Array)) {
-                // If server send an error message
-                if (res.msg) {
-                    Alert_show(res.msg, play)
-                    return
-                }
-            }
             if (next) {
                 if (!next instanceof Function) {
                     Alert_show(Errors.ParameterMissing("Fetch_Next", "next"), play)
                 } else {
-                    next(res, sendToNext)
+                    return next(res, sendToNext)
                 }
             }
         })

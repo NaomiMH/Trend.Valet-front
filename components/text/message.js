@@ -17,8 +17,8 @@ export const Message = {
         english: "First Roll Label"
     }[language],
     SecondLabel: {
-        spanish: "Segunda Etiqueta del Rollo",
-        english: "Second Roll Label"
+        spanish: "Ultima Etiqueta del Rollo",
+        english: "Last Roll Label"
     }[language],
     ThirdLabel: {
         spanish: "Etiqueta de la Ficha de Embarque",

@@ -1,33 +1,57 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import useSound from "use-sound";
-import { Alert_path } from "./alert/alert";
-import { Fetch_Data_Exit } from "./fetch/fetch_data_exit";
+import { Alert_path, Alert_show } from "./alert/alert";
+import { Fetch } from "./fetch/fetch";
 import Header from "./header";
 import { Attributes } from "./helpers/consts";
 import { Log } from "./helpers/database";
 import Sidebar from "./sidebar";
-import { Errors } from "./text/error";
 
 const Layout = ({ children, width }) => {
     // Get the router
     const router = useRouter();
-    // Save the information
+    // Check if data have been fetch
     const [data, setData] = useState({});
+    const [empty, setEmpty] = useState(false);
     // Save sound
     const [play] = useSound(Alert_path);
 
+    function checkLog(data) {
+        if (!data) {
+            return "Loading.."
+        }
+        if ("msg" in data) {
+            Alert_show(data.msg, play)
+            router.push('/login')
+            return
+        }
+        if (Object.keys(data).length != 0) {
+            setData(data)
+            localStorage.setItem('Name', data[Attributes.Name])
+            localStorage.setItem('Admin', data[Attributes.Admin])
+            return
+        }
+        router.push('/login')
+        return
+    }
+
     function fetchData() {
-        Fetch_Data_Exit(Log.token, play, setData, "/login")
+        return Fetch(Log.token, play, checkLog)
     }
 
     useEffect(() => {
         if (router.pathname != "/login") {
-            if (Object.keys(data).length == 0) {
-                fetchData()
+            if (!empty) {
+                setEmpty(true)
+                return fetchData()
             }
         }
     })
+
+    if (router.pathname == '/login') {
+        return logLayout()
+    }
 
     function logLayout() {
         return (
@@ -37,43 +61,25 @@ const Layout = ({ children, width }) => {
         )
     }
 
-    if (router.pathname == "/login") {
-        return logLayout()
+    function defLayout(data) {
+        return (
+            <div className="flex flex-col md:flex-row min-h-screen">
+                <Sidebar width={width} admin={data[Attributes.Admin]} />
+                <main className="w-full md:w-3/4 xl:w-6/7 md:min-h-screen">
+                    <div className="m-5">
+                        <Header width={width} name={data[Attributes.Name]} />
+                        {children}
+                    </div>
+                </main>
+            </div>
+        )
     }
 
-    if (!data) {
-        return "Loading..."
+    if (Object.keys(data).length != 0) {
+        return defLayout(data)
     }
 
-    if (Object.keys(data).length == 0) {
-        return "Loading..."
-    }
-
-    if (typeof window !== 'undefined') {
-        localStorage.setItem('Name', data[Attributes.Name])
-        localStorage.setItem('Admin', data[Attributes.Admin])
-        if (router.pathname == "/signup") {
-            if (data[Attributes.Admin]) {
-                return logLayout()
-            } else {
-                alert(Errors.Permission)
-                router.push('/')
-            }
-        }
-    }
-
-
-    return (
-        <div className="flex flex-col md:flex-row min-h-screen">
-            <Sidebar width={width} admin={data[Attributes.Admin]} />
-            <main className="w-full md:w-3/4 xl:w-6/7 md:min-h-screen">
-                <div className="m-5">
-                    <Header width={width} name={data[Attributes.Name]} />
-                    {children}
-                </div>
-            </main>
-        </div>
-    )
+    return logLayout(data)
 }
 
 export default Layout;

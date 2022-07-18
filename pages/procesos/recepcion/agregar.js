@@ -62,12 +62,12 @@ const RecepcionAgregar = () => {
         }
 
         if (count == 3) {
-            tempRead[count].accepted = 1
-            if (tempRead[1].info[Attributes.Clave_Material] == info[Attributes.Clave_Material]) {
-                tempRead[1].accepted = 1
-            }
-            if (tempRead[2].info[Attributes.Clave_Material] == info[Attributes.Clave_Material]) {
+            tempRead[1].accepted = 1
+            if (tempRead[1].info[Attributes.Clave_Material] == tempRead[2].info[Attributes.Clave_Material]) {
                 tempRead[2].accepted = 1
+            }
+            if (tempRead[1].info[Attributes.Clave_Material] == tempRead[3].info[Attributes.Clave_Material]) {
+                tempRead[3].accepted = 1
             }
         }
         setCount(count + 1)
@@ -185,13 +185,13 @@ const RecepcionAgregar = () => {
             <div className="my-3">
                 <h1 className="text-2xl text-gray-800 font-light">{Text.CheckLabels}</h1>
                 <div className='my-3'>
-                    <p>{Message.FirstLabel}: {check(1)}</p>
-                    <p>{Message.SecondLabel}: {check(2)}</p>
-                    <p>{Message.ThirdLabel}: {check(3)}</p>
+                    <p>{Message.ThirdLabel}: {check(1)}</p>
+                    <p>{Message.FirstLabel}: {check(2)}</p>
+                    <p>{Message.SecondLabel}: {check(3)}</p>
                     <p>{Text.Result}: {check(4)}</p>
                     {count < 4 ? (
                         <>
-                            <label className='font-bold'>{Text.Scann} {count == 1 ? Message.FirstLabel : count == 2 ? Message.SecondLabel : Message.ThirdLabel}</label>
+                            <label className='font-bold'>{Text.Scann} {count == 1 ? Message.ThirdLabel : count == 2 ? Message.FirstLabel : Message.SecondLabel}</label>
                             <In_standard
                                 inName={"etiqueta"}
                                 inPlaceHolder={Text.SelectScann}
