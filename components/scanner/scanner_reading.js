@@ -132,6 +132,11 @@ export function Scanner_Reading(event, { pallet, description } = {}) {
         if (temp[0].length <= 4) {
             return ["location", temp[0], reading]
         }
+
+        if (reading.length > 200) {
+            return ["error unknown", reading.substring(0, 200), reading.substring(0, 200)]
+        }
+        
         return ["description", temp[0], reading]
     }
     if (temp.length == 2) {

@@ -5,7 +5,7 @@ import Btn_Standard from '../../../components/buttons/btn_standard';
 import { Send_Email } from '../../../components/email/send_email';
 import { Fetch_Next } from '../../../components/fetch/fetch_next';
 import { Attributes } from '../../../components/helpers/consts';
-import { Label } from '../../../components/helpers/database';
+import { Label, Scanner } from '../../../components/helpers/database';
 import In_standard from '../../../components/input/in_standard';
 import Layout from '../../../components/Layout';
 import { Scanner_Reading } from '../../../components/scanner/scanner_reading';
