@@ -1,5 +1,5 @@
 import Btn_Standard from '../components/buttons/btn_standard';
-import Layout from '../components/Layout';
+import Layout from '../components/layout';
 
 const Template = () => {
     return (

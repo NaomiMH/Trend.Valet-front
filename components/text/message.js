@@ -2,6 +2,10 @@ import language from "."
 
 export const Message = {
     // Requerido
+    Save: {
+        spanish: "Los cambios han sido guardados",
+        english: "Changes have been saved"
+    }[language],
 
     // Personalizado
     FinishFirst: {

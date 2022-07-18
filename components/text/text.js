@@ -84,6 +84,10 @@ export const Text = {
         spanish: "Iniciar Sesion",
         english: "Login"
     }[language],
+    Signup: {
+        spanish: "Crear Cuenta",
+        english: "Sign up"
+    }[language],
     Admin: {
         spanish: "Administrador",
         english: "Administrator"
@@ -91,6 +95,10 @@ export const Text = {
     Name: {
         spanish: "Nombre",
         english: "Name"
+    }[language],
+    Create: {
+        spanish: "Crear",
+        english: "Create"
     }[language],
 
     // Paginas (Dafault)

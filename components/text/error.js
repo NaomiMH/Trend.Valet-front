@@ -47,6 +47,14 @@ export const Errors = {
         spanish: "AVISO: Etiqueta invalida. Realice un test de la Etiqueta.",
         english: "WARNING: Invalid tag. Take a test of the Label."
     }[language],
+    Permission: {
+        spanish: "Necesita permiso para continuar. Utilice una cuenta de administrador.",
+        english: "You need permission to continue. Use an administrator account."
+    }[language],
+    Protected: {
+        spanish: "Informacion protegida.",
+        english: "Protected information."
+    }[language],
 
     // Personalizado
     MissingEmails: {

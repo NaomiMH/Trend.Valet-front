@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import useSound from "use-sound";
-import { Alert_path } from "../../../components/alert/alert";
-import { Fetch_Data } from "../../../components/fetch/fetch_data";
-import { Fetch_Next } from "../../../components/fetch/fetch_next";
-import { Attributes } from "../../../components/helpers/consts";
-import { Email } from "../../../components/helpers/database";
-import Layout from "../../../components/Layout";
-import Table_Body from "../../../components/table/tb_body";
-import { Text } from "../../../components/text/text";
+import { Alert_path } from "../../components/alert/alert";
+import { Fetch_Data } from "../../components/fetch/fetch_data";
+import { Fetch_Next } from "../../components/fetch/fetch_next";
+import { Attributes } from "../../components/helpers/consts";
+import { Email } from "../../components/helpers/database";
+import Layout from "../../components/layout";
+import Table_Body from "../../components/table/tb_body";
+import { Text } from "../../components/text/text";
 
 const Emails = () => {
     // Save the information

@@ -47,10 +47,39 @@ const Form_Log = ({ FlistValues, FonSubmit, FNombre, mensaje }) => {
         onSubmit: async valores => await FonSubmit(valores)
     })
 
-    const mostrarMensaje = () => {
+    function normalInput(dato) {
         return (
-            <div className="bg-white py-2 px-3 w-full my-3 max-w-sm text-center mx-auto">
-                <p>{mensaje}</p>
+            <div className="mb-4">
+                <label className="block text-sm font-bold mb-2" htmlFor={dato.name}>
+                    {dato.text}
+                </label>
+                <input
+                    className={"shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"}
+                    id={dato.name}
+                    type={dato.type}
+                    placeholder={dato.placeholder}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values[dato.name]}
+                />
+            </div>
+        )
+    }
+
+    function checkboxInput(dato) {
+        return (
+            <div className="mb-4 flex items-center">
+                <input
+                    className={"shadow border rounded py-2 px-3 mr-3 leading-tight focus:outline-none focus:shadow-outline"}
+                    id={dato.name}
+                    type={dato.type}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values[dato.name]}
+                />
+                <label className="block text-sm font-bold" htmlFor={dato.name}>
+                    {dato.text}
+                </label>
             </div>
         )
     }
@@ -58,21 +87,7 @@ const Form_Log = ({ FlistValues, FonSubmit, FNombre, mensaje }) => {
     function addInput(dato) {
         return (
             <>
-                <div className="mb-4">
-                    <label className="block text-sm font-bold mb-2" htmlFor={dato.name}>
-                        {dato.text}
-                    </label>
-
-                    <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                        id={dato.name}
-                        type={dato.type}
-                        placeholder={dato.placeholder}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values[dato.name]}
-                    />
-                </div>
+                {dato.type == "checkbox" ? checkboxInput(dato) : normalInput(dato)}
                 {formik.touched[dato.name] && formik.errors[dato.name] ? (
                     <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 " >
                         <p className="font-bold">{Text.Error}</p>

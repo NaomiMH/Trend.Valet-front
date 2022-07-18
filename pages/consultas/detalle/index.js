@@ -5,7 +5,7 @@ import { Fetch_Data } from "../../../components/fetch/fetch_data";
 import { Fetch_Next } from "../../../components/fetch/fetch_next";
 import { Attributes } from "../../../components/helpers/consts";
 import { Label } from "../../../components/helpers/database";
-import Layout from "../../../components/Layout";
+import Layout from "../../../components/layout";
 import Table_Body from "../../../components/table/tb_body";
 import { Text } from "../../../components/text/text";
 
@@ -53,7 +53,7 @@ const LabelHistory = () => {
         "Refrescar": fetchData
     }
 
-    if (Admin) {
+    if (Admin == "1") {
         dict_functions["editable"] = {
             onRowDelete: (row) => new Promise((res, rej) => {
                 deleteMaterial(row)

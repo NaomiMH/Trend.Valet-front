@@ -7,7 +7,7 @@ import { Fetch_Next } from '../../../components/fetch/fetch_next';
 import { Attributes } from '../../../components/helpers/consts';
 import { Label, Scanner } from '../../../components/helpers/database';
 import In_standard from '../../../components/input/in_standard';
-import Layout from '../../../components/Layout';
+import Layout from '../../../components/layout';
 import { Scanner_Reading } from '../../../components/scanner/scanner_reading';
 import { Errors } from '../../../components/text/error';
 import { Message } from '../../../components/text/message';

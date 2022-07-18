@@ -8,47 +8,15 @@ import { Fetch_Next } from '../components/fetch/fetch_next';
 import Form_Log from '../components/form/form_log';
 import { Attributes } from '../components/helpers/consts';
 import { Log } from '../components/helpers/database';
-import Layout from '../components/Layout';
+import Layout from '../components/layout';
 import { Errors } from '../components/text/error';
 import { Text } from '../components/text/text';
 
 const Login = () => {
     // Save sound
     const [play] = useSound(Alert_path);
-
     // routing
     const router = useRouter();
-
-    const formik = useFormik({
-        onSubmit: async valores => {
-            // console.log(valores);
-            const { email, password } = valores;
-
-            try {
-                guardarMensaje('Autenticando...');
-
-                // Guardar el token en localstorage
-                // setTimeout(() => {
-                //     const { token } = data.autenticarUsuario;
-                //     localStorage.setItem('token', token);
-                // }, 1000);
-
-                // Redireccionar hacia clientes
-                setTimeout(() => {
-                    guardarMensaje(null);
-                    router.push('/');
-                }, 2000);
-
-            } catch (error) {
-                guardarMensaje(error.message.replace('GraphQL error: ', ''));
-                // console.log(error);
-
-                setTimeout(() => {
-                    guardarMensaje(null);
-                }, 3000);
-            }
-        }
-    })
 
     // Values for the Form
     const FormValues = [

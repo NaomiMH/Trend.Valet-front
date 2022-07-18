@@ -9,8 +9,8 @@ const Sidebar = ({ width, admin }) => {
 
     // Content of each menu
     const menu_sistema = [
-        { name: Text.Users, link: "/sistema/configuracion/users" },
-        { name: Text.Emails, link: "/sistema/configuracion/emails" }
+        { name: Text.Users, link: "/sistema/users" },
+        { name: Text.Emails, link: "/sistema/emails" }
     ];
     const menu_consultas = [
         { name: Text.HistoryLabels, link: "/consultas/detalle" }

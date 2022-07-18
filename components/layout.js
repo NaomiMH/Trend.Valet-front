@@ -7,10 +7,11 @@ import Header from "./header";
 import { Attributes } from "./helpers/consts";
 import { Log } from "./helpers/database";
 import Sidebar from "./sidebar";
+import { Errors } from "./text/error";
 
 const Layout = ({ children, width }) => {
     // Get the router
-    const router = new useRouter();
+    const router = useRouter();
     // Save the information
     const [data, setData] = useState({});
     // Save sound
@@ -28,7 +29,7 @@ const Layout = ({ children, width }) => {
         }
     })
 
-    if (router.pathname == "/login") {
+    function logLayout() {
         return (
             <div className="bg-dark-blue min-h-screen flex flex-col justify-center">
                 {children}
@@ -36,14 +37,31 @@ const Layout = ({ children, width }) => {
         )
     }
 
+    if (router.pathname == "/login") {
+        return logLayout()
+    }
+
     if (!data) {
+        return "Loading..."
+    }
+
+    if (Object.keys(data).length == 0) {
         return "Loading..."
     }
 
     if (typeof window !== 'undefined') {
         localStorage.setItem('Name', data[Attributes.Name])
         localStorage.setItem('Admin', data[Attributes.Admin])
+        if (router.pathname == "/signup") {
+            if (data[Attributes.Admin]) {
+                return logLayout()
+            } else {
+                alert(Errors.Permission)
+                router.push('/')
+            }
+        }
     }
+
 
     return (
         <div className="flex flex-col md:flex-row min-h-screen">
