@@ -76,6 +76,9 @@ const Layout = ({ children, width }) => {
     }
 
     if (Object.keys(data).length != 0) {
+        if (router.pathname == '/signup') {
+            return logLayout(data)
+        }
         return defLayout(data)
     }
 
