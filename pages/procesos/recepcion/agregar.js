@@ -6,6 +6,7 @@ import { Send_Email } from '../../../components/email/send_email';
 import { Fetch_Next } from '../../../components/fetch/fetch_next';
 import { Attributes } from '../../../components/helpers/consts';
 import { Label, Scanner } from '../../../components/helpers/database';
+import Get_Position from '../../../components/helpers/get_position';
 import In_standard from '../../../components/input/in_standard';
 import Layout from '../../../components/layout';
 import { Scanner_Reading } from '../../../components/scanner/scanner_reading';
@@ -63,11 +64,17 @@ const RecepcionAgregar = () => {
 
         if (count == 3) {
             tempRead[1].accepted = 1
-            if (tempRead[1].info[Attributes.Clave_Material] == tempRead[2].info[Attributes.Clave_Material]) {
-                tempRead[2].accepted = 1
-            }
-            if (tempRead[1].info[Attributes.Clave_Material] == tempRead[3].info[Attributes.Clave_Material]) {
-                tempRead[3].accepted = 1
+            if (!tempRead[1].error) {
+                if (!tempRead[2].error) {
+                    if (tempRead[1].info[Attributes.Clave_Material] == tempRead[2].info[Attributes.Clave_Material]) {
+                        tempRead[2].accepted = 1
+                    }
+                }
+                if (!tempRead[3].error) {
+                    if (tempRead[1].info[Attributes.Clave_Material] == tempRead[3].info[Attributes.Clave_Material]) {
+                        tempRead[3].accepted = 1
+                    }
+                }
             }
         }
         setCount(count + 1)
@@ -80,7 +87,7 @@ const RecepcionAgregar = () => {
         setRead(defaultRead)
     }
 
-    async function nextSave(data, { read }) {
+    async function nextSave(data) {
         if ("emailList" in data) {
             if ("msg" in data.emailList) {
                 Alert_show(data.email.msg, play)
@@ -89,25 +96,25 @@ const RecepcionAgregar = () => {
             if (!data[Attributes.Result] || read["error"]) {
                 const name = localStorage.getItem('Name')
                 if (!name) {
-                    Alert_show(Errors.ParameterMissing('nextSave', Attributes.Name))
+                    Alert_show(Errors.ParameterMissing('nextSave', Attributes.Name), play)
                     return
                 }
 
                 if (data.emailList.length == 0) {
-                    Alert_show(Errors.MissingEmails)
+                    Alert_show(Errors.MissingEmails, play)
                     return
                 }
 
                 const templateParams = {
                     nombre: name,
-                    fecha: data[Attributes.Date],
+                    fecha: data[Attributes.Date].replace("T", " ").slice(0, Get_Position(data[Attributes.Date], ".", 1)),
                     error: read["error"] ? Errors.ErrorLabel : "",
-                    label1: data[Attributes.Label1],
-                    label1R: read[1].accepted && !read[1]["error"] ? Text.Accepted : Text.Refused,
-                    label2: data[Attributes.Label2],
-                    label2R: read[2].accepted && !read[2]["error"] ? Text.Accepted : Text.Refused,
-                    label3: data[Attributes.Label3],
-                    label3R: !read[3]["error"] ? "" : Text.Refused,
+                    label1: data[Attributes.Label2],
+                    label1R: read[2].accepted && !read[2]["error"] ? Text.Accepted : Text.Refused,
+                    label2: data[Attributes.Label3],
+                    label2R: read[3].accepted && !read[3]["error"] ? Text.Accepted : Text.Refused,
+                    label3: data[Attributes.Label1],
+                    label3R: !read[1]["error"] ? "" : Text.Refused,
                     turno: data[Attributes.Shift],
                     emails: data.emailList.map((elem) => elem[Attributes.Email]).join(";"),
                 }
@@ -136,7 +143,7 @@ const RecepcionAgregar = () => {
         }
 
         // Enviar resultado final
-        Fetch_Next(Label.postLabel, play, nextSave, "post", { data: postData }, { read })
+        Fetch_Next(Label.postLabel, play, nextSave, "post", { data: postData })
     }
 
     function check(num) {
