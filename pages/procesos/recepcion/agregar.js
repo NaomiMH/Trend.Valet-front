@@ -133,9 +133,9 @@ const RecepcionAgregar = () => {
 
         // Comprobar resultado final
         const postData = {}
-        postData[Attributes.Label1] = read[1].reading
-        postData[Attributes.Label2] = read[2].reading
-        postData[Attributes.Label3] = read[3].reading
+        postData[Attributes.Label3] = read[1].reading
+        postData[Attributes.Label1] = read[2].reading
+        postData[Attributes.Label2] = read[3].reading
         if (read[1].accepted && read[2].accepted && read[3].accepted) {
             postData[Attributes.Result] = 1
         } else {
