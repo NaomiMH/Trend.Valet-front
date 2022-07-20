@@ -21,7 +21,7 @@ export const Message = {
         english: "Last Roll Label"
     }[language],
     ThirdLabel: {
-        spanish: "Etiqueta de la Ficha de Embarque",
+        spanish: "Etiqueta de la Ficha de Empaque",
         english: "Shipping Slip Label"
     }[language],
     Success: {
