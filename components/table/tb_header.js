@@ -41,9 +41,9 @@ function Table_Header(listHeader) {
         // { title: Text.Name, field: Attributes.Name, name: 'Name' },
 
         // LabelLog
-        { title: Text.Label3, field: Attributes.Label1, name: 'Label1' },
-        { title: Text.Label1, field: Attributes.Label2, name: 'Label2' },
-        { title: Text.Label2, field: Attributes.Label3, name: 'Label3' },
+        { title: Text.Label1, field: Attributes.Label1, name: 'Label1' },
+        { title: Text.Label2, field: Attributes.Label2, name: 'Label2' },
+        { title: Text.Label3, field: Attributes.Label3, name: 'Label3' },
         {
             title: Text.Date, field: Attributes.Date, name: 'Date',
             render: (rowData) => {
